@@ -5,7 +5,7 @@ from handlers import router
 
 
 
-TOKEN = os.getenv("8277724959:AAHBIylRRcVnuAD1_1ytjQhStvRzx2LdHbo") # токен через переменную окружения
+TOKEN = os.getenv("BOT_TOKEN") # токен через переменную окружения
 
 bot = Bot(token=TOKEN)
 dp = Dispatcher()
