@@ -12,6 +12,7 @@ from payment import (
 
 router = Router()
 
+
 router.pre_checkout_query.register(pre_checkout_handler)
 router.message.register(success_payment_handler, F.successful_payment)
 router.message.register(pay_support_handler, Command("paysupport"))
@@ -27,7 +28,7 @@ async def start_handler(message: Message):
 async def start_handler(message: Message):
     await message.answer(
         "Купить ключ",
-        reply_markup=send_invoice_handler
+        reply_markup=router.message.register(send_invoice_handler)
     )
 
 
@@ -62,7 +63,7 @@ async def show_help_menu(message: Message):
 
 
 @router.message(F.text == "🚀 Купить доступ")
-async def buy_handler(message: Message):
+async def buy_menu(message: Message):
     await message.answer("Раздел покупки (пока заглушка)")
 
 
