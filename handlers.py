@@ -12,7 +12,6 @@ from payment import (
 
 router = Router()
 
-router.message.register(send_invoice_handler, Command("donate"))
 router.pre_checkout_query.register(pre_checkout_handler)
 router.message.register(success_payment_handler, F.successful_payment)
 router.message.register(pay_support_handler, Command("paysupport"))
@@ -22,6 +21,13 @@ async def start_handler(message: Message):
     await message.answer(
         "Привет",
         reply_markup=platform_menu()
+    )
+
+@router.message(CommandStart())
+async def start_handler(message: Message):
+    await message.answer(
+        "Купить ключ",
+        reply_markup=send_invoice_handler
     )
 
 
