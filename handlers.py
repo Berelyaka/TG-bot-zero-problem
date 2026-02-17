@@ -74,3 +74,7 @@ async def show_main_menu(message: Message):
     reply_markup=start_inline_menu(),
     parse_mode="HTML"
 )
+     await message.answer(
+        "",
+        reply_markup=platform_menu()
+    )
