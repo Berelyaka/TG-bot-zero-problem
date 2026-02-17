@@ -2,10 +2,26 @@ from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 
 
+
 def start_inline_menu():
     builder = InlineKeyboardBuilder()
-    builder.button(text="Купить ключ", callback_data="buy_menu")
+    builder.button(text="Купить ключ", callback_data="buy_key")
     return builder.as_markup()
+
+
+
+def region_menu():
+    builder = InlineKeyboardBuilder()
+
+    builder.button(text="Регион 1", callback_data="region_1")
+    builder.button(text="Регион 2", callback_data="region_2")
+    builder.button(text="Регион 3", callback_data="region_3")
+    builder.button(text="🔙 Назад", callback_data="back_to_main")
+
+    builder.adjust(1)  # по одной кнопке в строке
+
+    return builder.as_markup()
+
 
 
 def platform_menu():
@@ -23,6 +39,7 @@ def platform_menu():
     )   
 
 
+
 def help_menu():
     return ReplyKeyboardMarkup(
         keyboard=[
@@ -34,6 +51,8 @@ def help_menu():
         ],
         resize_keyboard=True
     )
+
+
 
 def buy_menu():
     return ReplyKeyboardMarkup(

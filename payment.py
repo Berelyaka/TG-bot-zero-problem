@@ -1,7 +1,9 @@
 from aiogram.types import LabeledPrice, Message  
 from aiogram.types import PreCheckoutQuery
 from klava_oplata import payment_keyboard  
-    
+
+
+
 async def send_invoice_handler(message: Message):  
     prices = [LabeledPrice(label="XTR", amount=20)]  
     await message.answer_invoice(  
@@ -19,8 +21,12 @@ async def send_invoice_handler(message: Message):
 async def pre_checkout_handler(pre_checkout_query: PreCheckoutQuery):  
     await pre_checkout_query.answer(ok=True)
 
+
+
 async def success_payment_handler(message: Message):  
     await message.answer(text="🥳Спасибо за вашу поддержку!🤗")
+
+
 
 async def pay_support_handler(message: Message):  
     await message.answer(  
