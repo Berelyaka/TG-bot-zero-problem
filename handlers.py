@@ -56,6 +56,15 @@ async def buy_key_handler(callback: CallbackQuery):
 
 
 
+@router.message(F.text == "Купить ключ")
+async def show_region_menu(message: Message):
+    await message.answer(
+        "🌍 Выберите регион для подключения:",
+        reply_markup=region_menu()
+    )
+
+
+
 @router.callback_query(F.data.startswith("region_"))
 async def region_selected(callback: CallbackQuery):
     region = callback.data.split("_")[1]
@@ -89,16 +98,6 @@ async def back_to_main(callback: CallbackQuery):
         parse_mode="HTML"
     )
     await callback.answer()
-
-
-
-@router.message(F.text == "Купить ключ")
-async def show_buy_menu(message: Message):
-    await message.answer(
-        "Выберите метод оплаты: ",
-        reply_markup=buy_menu()
-    )
-
 
 
 
