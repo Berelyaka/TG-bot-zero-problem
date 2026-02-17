@@ -53,7 +53,6 @@ async def start_handler(message: Message):
     "Никаких сложных настроек — вы получаете готовый доступ и простую инструкцию.\n\n"
     "Нажмите кнопку ниже, чтобы получить ключ и начать пользоваться сервисом.",
     reply_markup=start_inline_menu(),
-    reply_markup=platform_menu(),
     parse_mode="HTML"
 )
 
