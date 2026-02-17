@@ -24,10 +24,10 @@ async def start_handler(message: Message):
         reply_markup=platform_menu()
     )
 
-@router.message(CommandStart())
-async def start_handler(message: Message):
+@router.message(F.text == "Купить ключ")
+async def show_buy_menu(message: Message):
     await message.answer(
-        "Купить ключ",
+        "Выберите метод оплаты: ",
         reply_markup=buy_menu()
     )
 
