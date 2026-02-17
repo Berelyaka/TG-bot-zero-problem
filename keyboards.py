@@ -1,4 +1,11 @@
 from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
+from aiogram.utils.keyboard import InlineKeyboardBuilder
+
+
+def start_inline_menu():
+    builder = InlineKeyboardBuilder()
+    builder.button(text="Купить ключ", callback_data="buy_menu")
+    return builder.as_markup()
 
 
 def platform_menu():
@@ -31,10 +38,8 @@ def help_menu():
 def buy_menu():
     return ReplyKeyboardMarkup(
         keyboard=[
-            [KeyboardButton(text="Крипта")],
-            [KeyboardButton(text="СБП")],
-            [KeyboardButton(text="Stars")],
-            [KeyboardButton(text="Назад")]
+            [KeyboardButton(text="Stars"),
+            KeyboardButton(text="Назад")]
         ],
         resize_keyboard=True
     )

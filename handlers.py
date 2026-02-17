@@ -3,6 +3,10 @@ from aiogram.types import Message
 from aiogram.filters import CommandStart
 from keyboards import platform_menu, help_menu, buy_menu
 from aiogram.filters import Command
+from aiogram.filters import CommandStart
+from aiogram.types import Message, CallbackQuery
+from aiogram import F
+from keyboards import start_inline_menu
 from payment import (
     send_invoice_handler,
     pre_checkout_handler,
@@ -16,6 +20,21 @@ router = Router()
 router.pre_checkout_query.register(pre_checkout_handler)
 router.message.register(success_payment_handler, F.successful_payment)
 router.message.register(pay_support_handler, Command("paysupport"))
+
+
+@router.message(CommandStart())
+async def start_handler(message: Message):
+    await message.answer(
+        "Добро пожаловать в Zero Problem VPN.\n\n"
+        "Сервис обеспечивает стабильное и защищённое соединение.\n\n"
+        "• Быстрое подключение\n"
+        "• Поддержка Android / iOS / Windows / MAC \n"
+        "• Мгновенная выдача ключа после оплаты\n\n"
+        "Для начала выберите действие ниже.",
+        reply_markup=start_inline_menu()
+    )
+
+
 
 @router.message(CommandStart())
 async def start_handler(message: Message):
@@ -36,19 +55,6 @@ router.message.register(
     F.text == "Stars"
 )
 
-@router.message(F.text == "📎 Android")
-async def android_handler(message: Message):
-    await message.answer("Инструкция для Android: ")
-
-
-@router.message(F.text == "📎 IOS")
-async def ios_handler(message: Message):
-    await message.answer("Инструкция для IOS ")
-
-
-@router.message(F.text == "💻 Windows/MAC")
-async def windows_handler(message: Message):
-    await message.answer("Инструкция для Windows/MAC ")
 
 
 @router.message(F.text == "FAQ")
@@ -65,17 +71,3 @@ async def show_help_menu(message: Message):
         reply_markup=platform_menu()
     )
 
-
-@router.message(F.text == "🚀 Купить доступ")
-async def show_buy_menu(message: Message):
-    await message.answer("Раздел покупки (пока заглушка)")
-
-
-@router.message(F.text == "📄 Мой аккаунт")
-async def account_handler(message: Message):
-    await message.answer("Раздел аккаунта (пока заглушка)")
-
-
-@router.message(F.text == "ℹ️ Поддержка")
-async def support_handler(message: Message):
-    await message.answer("Поддержка: @your_support_username")

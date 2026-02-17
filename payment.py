@@ -5,8 +5,8 @@ from klava_oplata import payment_keyboard
 async def send_invoice_handler(message: Message):  
     prices = [LabeledPrice(label="XTR", amount=20)]  
     await message.answer_invoice(  
-        title="Поддержка канала",  
-        description="Поддержать канал на 20 звёзд!",  
+        title="Покупка ключа",  
+        description="Купить ключ доступа за 20 звёзд!",  
         prices=prices,  
         provider_token="",  
         payload="channel_support",  
