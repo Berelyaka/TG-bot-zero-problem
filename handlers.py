@@ -1,7 +1,7 @@
 from aiogram import Router, F
 from aiogram.types import Message
 from aiogram.filters import CommandStart
-from keyboards import platform_menu, help_menu
+from keyboards import platform_menu, help_menu, buy_menu
 from aiogram.filters import Command
 from payment import (
     send_invoice_handler,
@@ -28,9 +28,13 @@ async def start_handler(message: Message):
 async def start_handler(message: Message):
     await message.answer(
         "Купить ключ",
-        reply_markup=router.message.register(send_invoice_handler)
+        reply_markup=buy_menu()
     )
 
+router.message.register(
+    send_invoice_handler,
+    F.text == "Stars"
+)
 
 @router.message(F.text == "📎 Android")
 async def android_handler(message: Message):
@@ -63,7 +67,7 @@ async def show_help_menu(message: Message):
 
 
 @router.message(F.text == "🚀 Купить доступ")
-async def buy_menu(message: Message):
+async def show_buy_menu(message: Message):
     await message.answer("Раздел покупки (пока заглушка)")
 
 
