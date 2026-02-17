@@ -61,12 +61,6 @@ async def show_help_menu(message: Message):
 
 @router.message(F.text == "Назад")
 async def show_main_menu(message: Message):
-    await message.answer(
-        reply_markup=platform_menu()
-    )
-
-@router.message(F.text == "Назад")
-async def show_main_menu(message: Message):
      await message.answer(
     "🚀 <b>Zero Problem VPN</b>\n\n"
     "Быстрый и стабильный доступ к сети без ограничений.\n\n"
