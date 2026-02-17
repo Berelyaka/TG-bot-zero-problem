@@ -2,6 +2,20 @@ from aiogram import Router, F
 from aiogram.types import Message
 from aiogram.filters import CommandStart
 from keyboards import platform_menu, help_menu
+from aiogram.filters import Command
+from payment import (
+    send_invoice_handler,
+    pre_checkout_handler,
+    success_payment_handler,
+    pay_support_handler
+)
+
+router = Router()
+
+router.message.register(send_invoice_handler, Command("donate"))
+router.pre_checkout_query.register(pre_checkout_handler)
+router.message.register(success_payment_handler, F.successful_payment)
+router.message.register(pay_support_handler, Command("paysupport"))
 
 router = Router()
 
@@ -16,7 +30,7 @@ async def start_handler(message: Message):
 
 @router.message(F.text == "📎 Android")
 async def android_handler(message: Message):
-    await message.answer("Инструкция для Android ")
+    await message.answer("Инструкция для Android: ")
 
 
 @router.message(F.text == "📎 IOS")

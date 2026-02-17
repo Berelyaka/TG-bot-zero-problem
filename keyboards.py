@@ -27,3 +27,14 @@ def help_menu():
         ],
         resize_keyboard=True
     )
+
+def buy_menu():
+    return ReplyKeyboardMarkup(
+        keyboard=[
+            [KeyboardButton(text="Крипта")],
+            [KeyboardButton(text="СБП")],
+            [KeyboardButton(text="Stars")],
+            [KeyboardButton(text="Назад")]
+        ],
+        resize_keyboard=True
+    )
