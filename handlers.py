@@ -9,14 +9,13 @@ from payment import (
     success_payment_handler,
     pay_support_handler
 )
-from main import dp
 
 router = Router()
 
-dp.message.register(send_invoice_handler, Command(commands="donate"))
-dp.pre_checkout_query.register(pre_checkout_handler)
-dp.message.register(success_payment_handler, F.successful_payment)
-dp.message.register(pay_support_handler, Command(commands="paysupport"))
+router.message.register(send_invoice_handler, Command("donate"))
+router.pre_checkout_query.register(pre_checkout_handler)
+router.message.register(success_payment_handler, F.successful_payment)
+router.message.register(pay_support_handler, Command("paysupport"))
 
 @router.message(CommandStart())
 async def start_handler(message: Message):
