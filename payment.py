@@ -1,19 +1,61 @@
 from aiogram.types import LabeledPrice, Message  
 from aiogram.types import PreCheckoutQuery
-from klava_oplata import payment_keyboard  
+from klava_oplata import payment_keyboard, payment_keyboard2 , payment_keyboard3 , payment_keyboard4   
 
 
 
-async def send_invoice_handler(message: Message):  
-    prices = [LabeledPrice(label="XTR", amount=20)]  
+async def low_price_handler(message: Message):  
+    prices = [LabeledPrice(label="XTR", amount=100)]  
     await message.answer_invoice(  
         title="Покупка ключа",  
-        description="Купить ключ доступа за 20 звёзд!",  
+        description="Купить ключ доступа за 100 звёзд!",  
         prices=prices,  
         provider_token="",  
         payload="channel_support",  
         currency="XTR",  
         reply_markup=payment_keyboard(),  
+    )
+
+
+
+async def cheap_price_handler(message: Message):  
+    prices = [LabeledPrice(label="XTR", amount=200)]  
+    await message.answer_invoice(  
+        title="Покупка ключа",  
+        description="Купить ключ доступа за 200 звёзд!",  
+        prices=prices,  
+        provider_token="",  
+        payload="channel_support",  
+        currency="XTR",  
+        reply_markup=payment_keyboard2(),  
+    )
+
+
+
+async def medium_price_handler(message: Message):  
+    prices = [LabeledPrice(label="XTR", amount=300)]  
+    await message.answer_invoice(  
+        title="Покупка ключа",  
+        description="Купить ключ доступа за 300 звёзд!",  
+        prices=prices,  
+        provider_token="",  
+        payload="channel_support",  
+        currency="XTR",  
+        reply_markup=payment_keyboard3(),  
+    )
+
+
+
+async def rich_price_handler(message: Message):  
+    prices = [LabeledPrice(label="XTR", amount=500)]  
+    await message.answer_invoice(  
+        title="Покупка ключа",  
+        description="Купить ключ доступа за 500 звёзд!",  
+        prices=prices,  
+        provider_token="",  
+        payload="channel_support",  
+        currency="XTR",  
+        reply_markup=payment_keyboard4(),  
     )
 
 

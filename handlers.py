@@ -1,13 +1,16 @@
 from aiogram import Router, F
 from aiogram.types import Message
 from aiogram.filters import CommandStart
-from keyboards import platform_menu, help_menu, buy_menu, region_menu
+from keyboards import platform_menu, help_menu, buy_menu, region_menu, price_menu
 from aiogram.filters import Command
 from aiogram.filters import CommandStart
 from aiogram.types import Message, CallbackQuery
 from keyboards import start_inline_menu
 from payment import (
-    send_invoice_handler,
+    low_price_handler,
+    cheap_price_handler,
+    medium_price_handler,
+    rich_price_handler,
     pre_checkout_handler,
     success_payment_handler,
     pay_support_handler
@@ -74,12 +77,41 @@ async def region_selected(callback: CallbackQuery):
     
     await callback.message.answer(
         f"🌍 Регион выбран: {region.upper()}\n\n"
-        "Выберите способ оплаты:",
-        reply_markup=buy_menu()
+        "Выберите тариф:",
+        reply_markup=price_menu()
     )
 
     await callback.answer()
 
+
+
+
+
+router.message.register(
+    low_price_handler,
+    F.text == "1 мес - 1$"
+)
+
+
+
+router.message.register(
+    cheap_price_handler,
+    F.text == "3 мес - 2$"
+)
+
+
+
+router.message.register(
+    medium_price_handler,
+    F.text == "6 мес - 3$"
+)
+
+
+
+router.message.register(
+    rich_price_handler,
+    F.text == "12 мес - 5$"
+)
 
 
 @router.callback_query(F.data == "back_to_main")
@@ -99,12 +131,6 @@ async def back_to_main(callback: CallbackQuery):
     )
     await callback.answer()
 
-
-
-router.message.register(
-    send_invoice_handler,
-    F.text == "Stars"
-)
 
 
 

@@ -62,3 +62,16 @@ def buy_menu():
         ],
         resize_keyboard=True
     )
+
+
+
+def price_menu():
+    return ReplyKeyboardMarkup(
+        keyboard=[
+            [KeyboardButton(text="1 мес - 1$"),
+             KeyboardButton(text="3 мес - 2$"),
+             KeyboardButton(text="6 мес - 3$")],
+             [KeyboardButton(text="12 мес - 5$")]
+        ],
+        resize_keyboard=True
+    )
