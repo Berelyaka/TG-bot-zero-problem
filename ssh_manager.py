@@ -8,7 +8,7 @@ SERVER_USER = "vpn"
 SERVER_PASSWORD = "privetNikita01"
 
 XRAY_CONFIG_PATH = "/usr/local/etc/xray/config.json"
-RESTART_COMMAND = "sudo systemctl restart zeroproblem"
+RESTART_COMMAND = "sudo systemctl restart xray"
 
 
 class SSHManager:
