@@ -115,6 +115,10 @@ async def price_selected(callback: CallbackQuery):
     await callback.answer()
 
 
+@router.callback_query(F.data == "region_locked")
+async def region_locked_handler(callback: CallbackQuery):
+    await callback.answer("Этот регион скоро будет доступен.", show_alert=True)
+
 # =========================
 # INLINE НАВИГАЦИЯ
 # =========================
