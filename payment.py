@@ -1,7 +1,36 @@
 from aiogram.types import LabeledPrice, Message, PreCheckoutQuery
 from keyboards import after_payment_menu
 from klava_oplata import payment_keyboard
+from database import add_subscription
+from vpn_manager import create_vless_client
 
+async def success_payment_handler(message: Message):
+    user_id = message.from_user.id
+    payload = message.successful_payment.invoice_payload
+
+    _, region, period = payload.split("_")
+
+    period_map = {
+        "1m": 30,
+        "3m": 90,
+        "6m": 180,
+        "12m": 365,
+    }
+
+    days = period_map.get(period, 30)
+
+    # создаём клиента на сервере
+    uuid_value, link = create_vless_client()
+
+    # сохраняем подписку в БД
+    add_subscription(user_id, region, days)
+
+    await message.answer(
+        "🎉 Оплата подтверждена!\n\n"
+        "Ваш персональный VPN доступ готов:\n\n"
+        f"{link}\n\n"
+        "Сохраните ссылку."
+    )
 
 # Соответствие тарифов
 TARIFFS = {
@@ -45,14 +74,3 @@ async def pre_checkout_handler(pre_checkout_query: PreCheckoutQuery):
     await pre_checkout_query.answer(ok=True)
 
 
-async def success_payment_handler(message: Message):
-    """
-    Обработка успешной оплаты
-    Здесь позже можно добавить выдачу ключа
-    """
-
-    await message.answer(
-        "✅ Оплата прошла успешно!\n\n"
-        "Ваш ключ будет выдан в ближайшее время.",
-        reply_markup=after_payment_menu()
-    )

@@ -3,7 +3,7 @@ from aiogram.utils.keyboard import InlineKeyboardBuilder
 
 
 # =========================
-# INLINE КЛАВИАТУРЫ (сценарий покупки)
+# INLINE КЛАВИАТУРЫ (сценарии)
 # =========================
 
 def start_inline_menu():
@@ -56,6 +56,7 @@ def platform_menu():
     return ReplyKeyboardMarkup(
         keyboard=[
             [KeyboardButton(text="🔑 Купить доступ")],
+            [KeyboardButton(text="📦 Мой доступ")],
             [KeyboardButton(text="🆓 Тестовый период"),
              KeyboardButton(text="🎁 Промо доступ")],
             [KeyboardButton(text="🔄 Изменить протокол"),
