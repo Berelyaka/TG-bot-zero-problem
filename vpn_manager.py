@@ -10,7 +10,7 @@ VLESS_TEMPLATE = (
     "&security=reality"
     "&sni=www.cloudflare.com"
     "&fp=chrome"
-    "&pbk=hC-HJoV6tRlvjbAZx42g1w_X_WatcKnaCMzzhLeX5k0"
+    "&pbk=AgCoRiPrJsVr5u_BrPsaAdFV1GlDEKKhk1dFUWqYkVI"
     "&sid=6ba85179e30d4fc2"
     "&type=tcp"
     "#VPN0Problem-🇨🇿"
